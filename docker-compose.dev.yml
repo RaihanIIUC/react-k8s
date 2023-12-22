@@ -2,8 +2,8 @@ version: "3.8"
 
 services:
   app:
-    container_name: react-k8s-srv
-    image: react-k8s-srv
+    container_name: app-react
+    image: app-react
     build:
       context: .
       target: development
