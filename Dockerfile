@@ -1,18 +1,14 @@
-# Fetching the latest node image on apline linux
-FROM node:18-alpine AS builder
-
-# Declaring env
-ENV NODE_ENV production
-
-# Setting up the work directory
+FROM node:18-alpine AS development
+ENV NODE_ENV development
+# Add a work directory
 WORKDIR /app
-
-# Installing dependencies
-COPY ./package.json ./
-RUN npm install
-
-# Copying all the files in our project
+# Cache and Install dependencies
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install
+# Copy app files
 COPY . .
-
-# Building our application
-RUN npm run build
+# Expose port
+EXPOSE 3000
+# Start the app
+CMD [ "yarn", "start" ]
